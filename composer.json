@@ -1,0 +1,29 @@
+{
+    "name": "stepsoft/soffice8sdk",
+    "description": "S-Office 8 SDK",
+    "type": "library",
+    "require" : {
+        "php": ">=8.0",
+        "lcobucci/jwt": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stepsoft\\Soffice8sdk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "pasko.paskov",
+            "email": "pasko@stepsoft.bg"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require-dev": {
+        "pestphp/pest": "2.x-dev"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
