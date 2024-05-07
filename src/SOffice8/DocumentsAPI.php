@@ -46,7 +46,7 @@ class DocumentsAPI extends BaseAPI
      * @param type $inputParam
      * @return type
      */
-    public function create($doctype, $internal_num = null, $inputParam = null)
+    public function create($doctype, $internal_num = null, $inputParam = [])
     {
         if (isset($internal_num)) {
             $response = $this->client->sendRequest('documents/' . $doctype . '/add/' . $internal_num, 'GET', $inputParam);
