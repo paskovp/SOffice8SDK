@@ -36,6 +36,29 @@ class NmclAPI extends BaseAPI {
     }
 
     /**
+     * Getting a range of records from a NMCL
+     * @param int $id
+     * @param int $rangeFrom
+     * @param int $rangeTo
+     * @return type
+     */
+     public function getNmclRange($id, $rangeFrom, $rangeTo, $sortByColumn, $filterByColumn){
+
+        $data = [
+            'id' => $id,
+            'rangeFrom' => $rangeFrom,
+            'rangeTo' => $rangeTo,
+            'sortByColumn' => $sortByColumn,
+            'filterByColumn' => $filterByColumn,
+        ];
+
+        $response = $this->client->sendRequest('nmcl/getRange', 'POST', $data);
+
+        return $this->validate($response);
+     }
+
+
+    /**
      * Returns all users in the system
      * @return type
      */
