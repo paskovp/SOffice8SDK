@@ -42,18 +42,20 @@ class NmclAPI extends BaseAPI {
      * @param int $rangeTo
      * @return type
      */
-     public function getNmclRange($id, $rangeFrom, $rangeTo, $sortByColumn, $filterByColumn){
+     public function getNmclRange($id, $rangeFrom, $rangeTo, $sortByColumn, $sortDirection, $filterByColumn, $filterValue){
 
         $data = [
             'id' => $id,
             'rangeFrom' => $rangeFrom,
             'rangeTo' => $rangeTo,
-            'sortByColumn' => $sortByColumn,
-            'filterByColumn' => $filterByColumn,
+            'sortByColumn' => $sortByColumn, //column to sort by, 'id' by default
+            'sortDirection' => $sortDirection, //'asc' by default, can be 'desc'
+            'filterByColumn' => $filterByColumn, //column to filter by
+            'filterValue' => $filterValue //value to filter by
         ];
 
         $response = $this->client->sendRequest('nmcl/getRange', 'POST', $data);
-
+        var_dump($response);
         return $this->validate($response);
      }
 
