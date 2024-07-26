@@ -1,6 +1,5 @@
 <?php
 
-use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 use Stepsoft\Soffice8sdk\SOffice8\DocumentsAPI;
 use Stepsoft\Soffice8sdk\SOfficeRequest;
 

@@ -45,9 +45,9 @@ class NmclAPI extends BaseAPI {
      public function getNmclRange($id, $rangeFrom, $rangeTo, $sortByColumn, $sortDirection, $filterByColumn, $filterValue){
 
         $data = [
-            'id' => $id,
-            'rangeFrom' => $rangeFrom,
-            'rangeTo' => $rangeTo,
+            'id' => $id, //id of the Nmcl to get the records within the range from
+            'rangeFrom' => $rangeFrom, //start id value of the range from which to get the records
+            'rangeTo' => $rangeTo, //end id value of the range to which to get the records
             'sortByColumn' => $sortByColumn, //column to sort by, 'id' by default
             'sortDirection' => $sortDirection, //'asc' by default, can be 'desc'
             'filterByColumn' => $filterByColumn, //column to filter by
