@@ -20,9 +20,17 @@ class ReportAPI extends BaseAPI {
         parent::__construct($client);
     }
 
-    public function getReportsResult($id_report, $params) {
-        $uri = '/reports/show/' . $id_report;
-        $response = $this->client->sendRequest($this->addParams($uri, $params), 'GET');
+    public function getReportResultAPI($id_report, $requestedrows, $startpage, $rows, $page) {
+
+        $data = [
+            'id_report' => $id_report, //id of the report to get the records from
+            'requestedrows' => $requestedrows, //number of rows requested
+            'startpage' => $startpage, //start page
+            'rows' => $rows, //number of rows
+            'page' => $page //page number
+        ];
+    
+        $response = $this->client->sendRequest('reports/reportAPI', 'POST', $data);
 
         return $this->validate($response);
     }
