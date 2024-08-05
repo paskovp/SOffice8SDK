@@ -10,7 +10,7 @@ test('Test NmclAPI', function () {
         'http://192.168.0.106:8081/', 
         //'https://soffice8api.stepsoft.bg/', 
         'v1', 
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJwYXNrb0BzdGVwc29mdC5iZyIsInN1YiI6IkFQSSIsImRhdGFiYXNlIjoiU09mZmljZThfU19EZXZlbG9wZXJOZXciLCJleHAiOjE3MjI4NjM4MzUuMzM3NDMzfQ.4bCt5yVzkSPqviB43whAq-2DXq8X--Vrw8iBojWgOh8');
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJwYXNrb0BzdGVwc29mdC5iZyIsInN1YiI6IkFQSSIsImRhdGFiYXNlIjoiU09mZmljZThfU19EZXZlbG9wZXJOZXciLCJleHAiOjE3MjI4NzUzODguMTk0NzQzfQ.Ay7lDuulQl6kgtiWksJj1kW9RGMqrOp6Q0LULRU4_i4');
     
     $testNmclAPIRequest = new NmclAPI($client);
 
@@ -27,7 +27,7 @@ test('Test NmclAPI', function () {
         ''
     );
 
-    var_dump($response);
+    //var_dump($response);
 
     // Ensure that the response is an object
     expect($response)->toBeArray();

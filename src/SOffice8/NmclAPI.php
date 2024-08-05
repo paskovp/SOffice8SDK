@@ -55,7 +55,7 @@ class NmclAPI extends BaseAPI {
         ];
 
         $response = $this->client->sendRequest('nmcl/getRange', 'POST', $data);
-        //var_dump($response);
+
         return $this->validate($response);
      }
 
