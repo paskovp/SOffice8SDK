@@ -42,7 +42,7 @@ class NmclAPI extends BaseAPI {
      * @param int $rangeTo
      * @return type
      */
-     public function getNmclRange($id, $rangeFrom, $rangeTo, $sortByColumn, $sortDirection, $filterByColumn, $filterValue){
+     public function getNmclRange($id, $rangeFrom, $rangeTo, $sortByColumn, $sortDirection, $filterByColumn, $filterValue, $filterByLastChange) {
 
         $data = [
             'id' => $id, //id of the Nmcl to get the records within the range from
@@ -51,7 +51,8 @@ class NmclAPI extends BaseAPI {
             'sortByColumn' => $sortByColumn, //column to sort by, 'id' by default
             'sortDirection' => $sortDirection, //'asc' by default, can be 'desc'
             'filterByColumn' => $filterByColumn, //column to filter by
-            'filterValue' => $filterValue //value to filter by
+            'filterValue' => $filterValue, //value to filter by
+            'filterByLastChange' => $filterByLastChange //datetime format string to filter result by datetime of last change (newer than the given value)
         ];
 
         $response = $this->client->sendRequest('nmcl/getRange', 'POST', $data);

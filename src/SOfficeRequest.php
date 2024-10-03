@@ -92,6 +92,10 @@ class SOfficeRequest
             $uri = substr($uri, 1);
         }
         $this->url = $this->getRequstTo() . $uri . $this->getParams;
+        
+        //Temporary fix for double question mark in url
+        $this->url = str_replace('??','?',$this->url);
+
         return curl_setopt($this->curl, CURLOPT_URL, $this->url);
     }
 
