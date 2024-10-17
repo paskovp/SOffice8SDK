@@ -57,6 +57,20 @@ class DocumentsAPI extends BaseAPI
     }
 
     /**
+     * Get documents by given type in the system 
+     * @param type $doctype
+     * @param type $internal_num
+     * @param type $inputParam
+     * @return type
+     */
+    public function fetchById($doctype, $docId)
+    {
+        $response = $this->client->sendRequest('documents/' . $doctype . '/fetchById/' . $docId, 'GET');
+
+        return $this->validate($response);
+    }
+
+    /**
      * Add document from a report
      * @param type $doctypeID
      * @param type $create_from_type
@@ -81,8 +95,6 @@ class DocumentsAPI extends BaseAPI
         $response = $this->client->sendRequest('documents/' . $doctype . '/createbyinheritance', 'POST', $data);
         return $this->validate($response);
     }
-
-
 
     /**
      * Add row to document section
@@ -219,9 +231,38 @@ class DocumentsAPI extends BaseAPI
         $response = $this->client->sendRequest('documents/addsearchrows', 'POST', $data);
         return $this->validate($response);
     }
+
+    /**
+     * Annul a document using the document id_doctype ($id) and the document id_title ($id_title) 
+     * @param $data
+     * @return int
+     */
     public function destroy($id, $id_title)
     {
         $response = $this->client->sendRequest("documents/destroy/$id/$id_title", 'POST', [$id]);
         return $this->validate($response);
     }
+
+    /**
+     * Save document into state
+     * @param $data
+     * @return type
+     */
+    public function saveDocumentIntoState($data)
+    {
+        $response = $this->client->sendRequest('documents/saveDocumentIntoState_API_END_POINT', 'POST', $data);
+        return $this->validate($response);
+    }
+
+    /**
+     * Save document sql
+     * @param $data
+     * @return type
+     */
+    public function saveDocumentDataSql($data)
+    {
+        $response = $this->client->sendRequest('documents/saveDocumentDataSql_API_END_POINT', 'POST', $data);
+        return $this->validate($response);
+    }
+
 }
