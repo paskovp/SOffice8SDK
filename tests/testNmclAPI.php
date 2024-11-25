@@ -7,25 +7,21 @@ test('Test NmclAPI', function () {
     
     //Replace Token with your own
     $client = new SOfficeRequest(
-        //'http://192.168.0.106:8081/', 
         'https://soffice8api.stepsoft.bg/', 
         'v1', 
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJzdXBwb3J0QHN0ZXBzb2Z0LmJnIiwic3ViIjoiQVBJIiwiZGF0YWJhc2UiOiJTT2ZmaWNlOF9NYWdudW1DeXBydXMiLCJleHAiOjE3Mjg0MTE2MzYuMzY2MTM0fQ.biag21dD-QujsN43-1Syxif2B9Y7q5G7d7e97r8TCok');
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJzdXBwb3J0QHN0ZXBzb2Z0LmJnIiwic3ViIjoiQVBJIiwiZGF0YWJhc2UiOiJTT2ZmaWNlOF9NYWdudW1DeXBydXMyMDIyIiwiZXhwIjoxNzMyNTMzODQ3LjgyMDQ1MX0.l7pkgIWSJsU_j4rEJfNkK_YtqHh-KSNylt9Fbv14d8k');
     
     $testNmclAPIRequest = new NmclAPI($client);
 
     $response = $testNmclAPIRequest->getNmclRange(
         17,
-        '',
-        '',
-        //27,
-        //10,
-        //100,
+        54209,
+        54209,
         '',
         '',
         '',
         '',
-        '2024-10-08 04:03:55.000', 
+        '', 
         false
     );
 

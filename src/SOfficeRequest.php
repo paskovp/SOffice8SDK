@@ -14,7 +14,7 @@ class SOfficeRequest
     protected $getParams = '';
     public $version;
 
-    public function __construct(string $sendRequestTo = 'http://apache:8081/', $version = "v1", $jwt_token = NULL)
+    public function __construct(string $sendRequestTo, $version = "v1", $jwt_token = NULL)
     {
         $this->setRequestTo($sendRequestTo);
         $this->version = $version;
@@ -263,17 +263,19 @@ class SOfficeRequest
     /**
      * @throws RequestError
      */
-    public function sendRequest(string $uri, string $method, array $data = [])
+    public function sendRequest(string $uri, string $method, array $data)
     {
         $jwt_token = 'jwt_token NOT SET';
         
         if (!empty($this->jwt_token)) {
             $data['jwt_token'] = $this->jwt_token;
         }
-        // \Session::put('autoserver', str_contains($uri, 'autocompleteServer') ? true : false);
+
         if (!method_exists($this, $method)) {
             throw new RequestError("method [$method] not exists");
         }
+
+        //var_dump($data);
 
         $this->$method($data);
         $this->setUri($uri);

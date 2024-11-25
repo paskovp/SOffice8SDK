@@ -63,9 +63,14 @@ class DocumentsAPI extends BaseAPI
      * @param type $inputParam
      * @return type
      */
-    public function fetchById($doctype, $docId)
+    public function fetchById($id_doctype, $doc_id)
     {
-        $response = $this->client->sendRequest('documents/' . $doctype . '/fetchById/' . $docId, 'GET');
+        $data = [
+            'id_doctype' => $id_doctype, //id of the doctype to get the information from
+            'doc_id' => $doc_id //id of the document 
+        ];
+
+        $response = $this->client->sendRequest('documents/fetchById', 'POST', $data);
 
         return $this->validate($response);
     }
