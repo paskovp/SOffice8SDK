@@ -10,17 +10,19 @@ test('Test ReportAPI', function () {
         'http://192.168.0.106:8081/', 
         //'https://soffice8api.stepsoft.bg/', 
         'v1', 
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJwYXNrb0BzdGVwc29mdC5iZyIsInN1YiI6IkFQSSIsImRhdGFiYXNlIjoiU09mZmljZThfU19EZXZlbG9wZXJOZXciLCJleHAiOjE3MjI5MzM2MTUuMzA3NTY1fQ.YxAugOkcjBd87-iAMtSAsvVgwCrIHxGlaofxhyNY02I');
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJzdXBwb3J0QHN0ZXBzb2Z0LmJnIiwic3ViIjoiQVBJIiwiZGF0YWJhc2UiOiJTT2ZmaWNlOF9NYWdudW1DeXBydXMiLCJleHAiOjE3MzI1NDkwMTkuNjQ3NDAyfQ.qTRsM3yOGpkri6Z3PXkyRAOeC2AtJoornMpgGcdpOC8');
     
     $testReportAPIRequest = new ReportAPI($client);
 
     $response = $testReportAPIRequest->getReportResultAPI(
-        141, //id of the report to get the records from
+        145, //id of the report to get the records from
         '40', //number of rows requested
         '1', //start page
         '', //number of rows
         '', //page number
     );
+
+    //var_dump($response);
 
     // Ensure that the response is an object
     expect($response)->toBeArray();

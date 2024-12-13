@@ -263,7 +263,7 @@ class SOfficeRequest
     /**
      * @throws RequestError
      */
-    public function sendRequest(string $uri, string $method, array $data)
+    public function sendRequest(string $uri, string $method, array $data=[])
     {
         $jwt_token = 'jwt_token NOT SET';
         
@@ -280,16 +280,12 @@ class SOfficeRequest
         $this->$method($data);
         $this->setUri($uri);
 
-        // if (\AuthUserSOffice::user()) {
-        //     curl_setopt($this->curl, CURLOPT_COOKIE, "laravel_session=" . \AuthUserSOffice::getUserToken() . ";");
-        // }
-
-        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, 1); //novo zaradi iztichaneto na sesiqta na survura
-        curl_setopt($this->curl, CURLOPT_HEADER, 1); //novo zaradi iztichaneto na sesiqta na survura
+        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($this->curl, CURLOPT_HEADER, 1); 
         $response = curl_exec($this->curl);
         // curl_close($this->curl);
-        $header_size = curl_getinfo($this->curl, CURLINFO_HEADER_SIZE); //novo zaradi iztichaneto na sesiqta na survura
-        $header = substr($response, 0, $header_size); //novo zaradi iztichaneto na sesiqta na survura
+        $header_size = curl_getinfo($this->curl, CURLINFO_HEADER_SIZE); 
+        $header = substr($response, 0, $header_size); 
         
         $response = substr($response, $header_size);
         // Check the content type from headers

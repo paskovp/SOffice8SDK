@@ -18,7 +18,7 @@ test('Test DocumentsAPI', function () {
         263 //id of the document
     );
 
-    var_dump($response);
+    // var_dump($response);
 
     // Ensure that the response is an object
     expect($response)->toBeArray();
