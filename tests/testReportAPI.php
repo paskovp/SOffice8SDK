@@ -23,7 +23,7 @@ test('Test ReportAPI', function () {
         '', //page number
     );
 
-    var_dump($response);
+    //var_dump($response);
 
     // Ensure that the response is an object
     expect($response)->toBeArray();
