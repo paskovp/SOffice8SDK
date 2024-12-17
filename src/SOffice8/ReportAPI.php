@@ -20,19 +20,22 @@ class ReportAPI extends BaseAPI {
         parent::__construct($client);
     }
 
-    public function getReportResultAPI($id_report, $requestedrows, $startpage, $rows, $page) {
+    public function getReportResultAPI($id_report, $id_report_setting, $requestedrows, $startpage, $rows, $page) {
 
         $data = [
             'id_report' => $id_report, //id of the report to get the records from
+            'id_report_setting' => $id_report_setting, //id of the report to get the records from
             'requestedrows' => $requestedrows, //number of rows requested
             'startpage' => $startpage, //start page
             'rows' => $rows, //number of rows
             'page' => $page //page number
         ];
     
-        $response = $this->client->sendRequest('reports/reportAPI', 'POST', $data);
+        $response1 = $this->client->sendRequest('reports/config/'.$id_report, 'GET');
 
-        return $this->validate($response);
+        $response2 = $this->client->sendRequest('reports/reportAPI', 'POST', $data);
+
+        return $this->validate($response2);
     }
 
     public function getAllReportTabsResult($data) {
