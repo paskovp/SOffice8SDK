@@ -20,7 +20,7 @@ class ReportAPI extends BaseAPI {
         parent::__construct($client);
     }
 
-    public function getReportResultAPI($id_report, $id_report_setting, $requestedrows, $startpage, $rows, $page) {
+    public function getReportResultAPI($id_report, $id_report_setting, $requestedrows, $startpage, $rows, $page, $config = true) {
 
         $data = [
             'id_report' => $id_report, //id of the report to get the records from
@@ -31,9 +31,13 @@ class ReportAPI extends BaseAPI {
             'page' => $page //page number
         ];
     
-        $response1 = $this->client->sendRequest('reports/config/'.$id_report, 'GET');
+        if ($config) {
+            $response1 = $this->client->sendRequest('reports/config/'.$id_report, 'GET');
+        }
 
         $response2 = $this->client->sendRequest('reports/reportAPI', 'POST', $data);
+
+        var_dump(json_encode($data));
 
         return $this->validate($response2);
     }

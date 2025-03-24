@@ -99,6 +99,16 @@ class UserAPI extends BaseAPI
         return $this->validate($response);
     }
 
+    /**
+     * Check user state
+     * @return type
+     */
+    public function checkSession()
+    {
+        $response = $this->client->sendRequest('/administration/users/checkSession/', 'GET');
+        return $this->validate($response);
+    }
+
     public function logout()
     {
         //\Log::error('Logout in UserAPI');
