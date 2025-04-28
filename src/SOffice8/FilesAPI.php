@@ -23,7 +23,7 @@ class FilesAPI extends BaseAPI {
      * @return type
      */
     public function downloadFile(string $file_name, $origin) {
-        $file_name = base64_encode($file_name);
+        $file_name = rtrim(strtr(base64_encode($file_name), '+/', '-_'), '=');
         $response = $this->client->sendRequest('file/' . $file_name . '/' . $origin, 'GET');
         return $this->validate($response);
     }
