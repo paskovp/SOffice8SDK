@@ -33,11 +33,12 @@ class ReportAPI extends BaseAPI {
     
         if ($config) {
             $response1 = $this->client->sendRequest('reports/config/'.$id_report, 'GET');
+            // var_dump($response1);
+            // Return settings loaded from the report configuration
+            // return $this->validate($response1);
         }
 
         $response2 = $this->client->sendRequest('reports/reportAPI', 'POST', $data);
-
-        var_dump(json_encode($data));
 
         return $this->validate($response2);
     }

@@ -63,6 +63,31 @@ class NmclAPI extends BaseAPI
         return $this->validate($response);
      }
 
+    /**
+    * Getting a range of records from a NMCL
+    * @param int $id
+    * @param int $rangeFrom
+    * @param int $rangeTo
+    * @return type
+    */
+    public function getNmclApi($id, $rangeFrom, $rangeTo, $sortByColumn, $sortDirection, $filterByColumn, $filterValue, $filterByLastChange, $sendFiles, $config = false) {
+
+        $data = [
+            'id' => $id, //id of the Nmcl to get the records within the range from
+            'rangeFrom' => $rangeFrom, //start id value of the range from which to get the records
+            'rangeTo' => $rangeTo, //end id value of the range to which to get the records
+            'sortByColumn' => $sortByColumn, //column to sort by, 'id' by default
+            'sortDirection' => $sortDirection, //'asc' by default, can be 'desc'
+            'filterByColumn' => $filterByColumn, //column to filter by
+            'filterValue' => $filterValue, //value to filter by
+            'filterByLastChange' => $filterByLastChange, //datetime format string to filter result by datetime of last change (newer than the given value)
+            'sendFiles' => $sendFiles, //boolean value to send files with the response
+            'config' => $config //config parameter (true/false) - if true, it will return the configuration of the Nmcl
+        ];
+        
+        $response = $this->client->sendRequest('nmcl/nmclAPI', 'POST', $data);
+        return $this->validate($response);
+    }
 
     /**
      * Returns all users in the system
