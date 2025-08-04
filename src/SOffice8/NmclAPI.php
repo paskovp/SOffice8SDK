@@ -70,12 +70,14 @@ class NmclAPI extends BaseAPI
     * @param int $rangeTo
     * @return type
     */
-    public function getNmclApi($id, $rangeFrom, $rangeTo, $sortByColumn, $sortDirection, $filterByColumn, $filterValue, $filterByLastChange, $sendFiles, $config = false) {
+    public function getNmclApi($id, $rangeFrom, $rangeTo, $startpage, $rowsPerPage, $sortByColumn, $sortDirection, $filterByColumn, $filterValue, $filterByLastChange, $sendFiles, $config = false) {
 
         $data = [
             'id' => $id, //id of the Nmcl to get the records within the range from
             'rangeFrom' => $rangeFrom, //start id value of the range from which to get the records
             'rangeTo' => $rangeTo, //end id value of the range to which to get the records
+            'startPage' => $startpage, //startpage for the result, when using pagination, within the range
+            'rowsPerPage' => $rowsPerPage, //number of rows per page, when using pagination, within the range, 10 by default
             'sortByColumn' => $sortByColumn, //column to sort by, 'id' by default
             'sortDirection' => $sortDirection, //'asc' by default, can be 'desc'
             'filterByColumn' => $filterByColumn, //column to filter by
@@ -84,7 +86,7 @@ class NmclAPI extends BaseAPI
             'sendFiles' => $sendFiles, //boolean value to send files with the response
             'config' => $config //config parameter (true/false) - if true, it will return the configuration of the Nmcl
         ];
-        
+
         $response = $this->client->sendRequest('nmcl/nmclAPI', 'POST', $data);
         return $this->validate($response);
     }
