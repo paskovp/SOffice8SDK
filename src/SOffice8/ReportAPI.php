@@ -20,23 +20,72 @@ class ReportAPI extends BaseAPI {
         parent::__construct($client);
     }
 
-    public function getReportResultAPI($id_report, $id_report_setting, $requestedrows, $startpage, $rows, $page, $config = true, $filters = null, $sortbycolumn = null, $sortdirection = null) {
-        
+    public function getReportResultAPI($id_report, $id_report_setting, $config = true, $requestedrows = null, $startpage = null, 
+    $rows = null, $configFilters = null, $filters = null, $sortbycolumn = null, $sortdirection = null) {
+ 
         if ($config) {
-            $response1 = $this->client->sendRequest('reports/config/'.$id_report, 'GET');
-        }
+            $uri = '/reports/config/'.$id_report;
+            if (isset($configFilters)) {
+                // Handle both array and JSON string inputs
+                if (is_string($configFilters)) {
+                    $configParams = json_decode($configFilters, true);
+                    if (json_last_error() !== JSON_ERROR_NONE) {
+                        throw new \Exception('Invalid JSON string for configFilters');
+                    }
+                } else {
+                    $configParams = $configFilters;
+                }
+
+                // Include jwt_token in params so all parameters are in flat query string format
+                // This prevents sendRequest from adding jwt_token separately (which would create malformed URL)
+                if (!empty($this->client->jwt_token)) {
+                    $configParams['jwt_token'] = $this->client->jwt_token;
+                }
+
+                // Build URI with all parameters (including jwt_token) in flat format
+                $uriWithParams = $uri . '?' . http_build_query($configParams);
+                
+                // Call sendRequest with empty array to prevent it from adding jwt_token again
+                // Use a temporary workaround: set jwt_token to null, call sendRequest, then restore it
+                $originalToken = $this->client->jwt_token;
+                $this->client->jwt_token = null;
+                $response1 = $this->client->sendRequest($uriWithParams, 'GET', []);
+                $this->client->jwt_token = $originalToken;
+
+            } else {
+                $response1 = $this->client->sendRequest($uri, 'GET');
+            }
+            return $this->validate($response1);
+        }    
 
         $data = [
             'id_report' => $id_report, //id of the report to get the records from
             'id_report_setting' => $id_report_setting, //id of the report to get the records from
-            'requestedrows' => $requestedrows, //number of rows requested, if null, all rows will be returned
-            'startpage' => $startpage, //start page, if null, all pages will be returned
-            'rows' => $rows, //number of rows, if null, all rows will be returned
             'config' => $config, //config parameter (true/false) - if true, it will return the configuration of the report
-            'filters' => $filters, //filters array like ['filter1' => 'value1', 'filter2' => 'value2'], if null, no filters will be applied
-            'sortbycolumn' => $sortbycolumn, //sort by column like 'id', if null, no sorting will be applied
-            'sortdirection' => $sortdirection //sort direction, asc by default, can be 'desc', if null, no sorting will be applied
         ];
+
+        // Only add optional parameters if they have values
+        if ($requestedrows !== null) {
+            $data['requestedrows'] = $requestedrows;
+        }
+        if ($startpage !== null) {
+            $data['startpage'] = $startpage;
+        }
+        if ($rows !== null) {
+            $data['rows'] = $rows;
+        }
+        if ($configFilters !== null) {
+            $data['configFilters'] = $configFilters;
+        }
+        if ($filters !== null) {
+            $data['filters'] = $filters;
+        }
+        if ($sortbycolumn !== null) {
+            $data['sortbycolumn'] = $sortbycolumn;
+        }
+        if ($sortdirection !== null) {
+            $data['sortdirection'] = $sortdirection;
+        }
     
 
         $response2 = $this->client->sendRequest('reports/reportAPI', 'POST', $data);

@@ -255,6 +255,7 @@ class DocumentsAPI extends BaseAPI
      */
     public function saveDocumentIntoState($data)
     {
+        
         $response = $this->client->sendRequest('documents/saveDocumentIntoState_API_END_POINT', 'POST', $data);
         return $this->validate($response);
     }
@@ -267,6 +268,13 @@ class DocumentsAPI extends BaseAPI
     public function saveDocumentDataSql($data)
     {
         $response = $this->client->sendRequest('documents/saveDocumentDataSql_API_END_POINT', 'POST', $data);
+        return $this->validate($response);
+    }
+
+
+    public function insertIntoStateAndSaveDocument($data)
+    {
+        $response = $this->client->sendRequest('documents/insertIntoStateAndSaveDocument_API_END_POINT', 'POST', $data);
         return $this->validate($response);
     }
 
