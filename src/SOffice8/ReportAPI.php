@@ -55,7 +55,7 @@ class ReportAPI extends BaseAPI {
             } else {
                 $response1 = $this->client->sendRequest($uri, 'GET');
             }
-            return $this->validate($response1);
+            // return $this->validate($response1);
         }    
 
         $data = [
